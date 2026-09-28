@@ -16,6 +16,7 @@ if (runNo > 10000) {
 
 String filePath = basePath + "sidisdvcs_" + runArg + ".hipo";
 double Ithreshold = 0.0;
+double Imaximum = 1000;
 
 println(">>> Initializing QADB...");
 QADB qa = new QADB("latest");
@@ -55,7 +56,7 @@ while(reader.hasNext()){
 		if (qa.pass(runNumber, eventNumber)) {
 			double getI = currentSeq.getInterval(timeStamp).getBeamCurrent();
 			n_e_events++;
-			if (getI > Ithreshold) {
+			if (getI > Ithreshold && getI < Imaximum) {
 				sumCurrentAboveThreshold_e += getI;
 				sumCurrentAboveThreshold2_e += Math.pow(getI, 2);
 				eventsAboveThreshold_e++;
